@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Services;
-
 
 namespace TestConsole
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-
             var queue = new QueueManager();
 
             const string key1 = "key1";
@@ -28,20 +22,45 @@ namespace TestConsole
             Console.WriteLine("{0} exists: {1}", listKey1, queue.Exists(listKey1).Result);
 
             queue.AddListHead(listKey1, "value1");
-            Console.WriteLine("{0} head is: {1}", listKey1, queue.GetListHeadAsync(listKey1).Result);
+            Console.WriteLine("{0} head is: {1} with len: {2} ", listKey1, queue.GetListHeadAsync(listKey1).Result, queue.GetListLenghAsync(listKey1).Result);
+            Console.WriteLine("{0} tails is: {1} with len: {2} ", listKey1, queue.GetListTailAsync(listKey1).Result, queue.GetListLenghAsync(listKey1).Result);
+            foreach (var elem in queue.GetListAsync(listKey1).Result)
+            {
+                Console.WriteLine("elem: {0}",elem);
+            }
+            
 
             queue.AddListHead(listKey1, "value2");
-            Console.WriteLine("{0} head is: {1}", listKey1, queue.GetListHeadAsync(listKey1).Result);
+            Console.WriteLine("{0} head is: {1} with len: {2} ", listKey1, queue.GetListHeadAsync(listKey1).Result, queue.GetListLenghAsync(listKey1).Result);
+            Console.WriteLine("{0} tails is: {1} with len: {2} ", listKey1, queue.GetListTailAsync(listKey1).Result, queue.GetListLenghAsync(listKey1).Result);
+            foreach (var elem in queue.GetListAsync(listKey1).Result)
+            {
+                Console.WriteLine("elem: {0}", elem);
+            }
 
             queue.AddListHead(listKey1, "value3");
-            Console.WriteLine("{0} head is: {1}", listKey1, queue.GetListHeadAsync(listKey1).Result);
+            Console.WriteLine("{0} head is: {1} with len: {2} ", listKey1, queue.GetListHeadAsync(listKey1).Result, queue.GetListLenghAsync(listKey1).Result);
+            Console.WriteLine("{0} tails is: {1} with len: {2} ", listKey1, queue.GetListTailAsync(listKey1).Result, queue.GetListLenghAsync(listKey1).Result);
+            foreach (var elem in queue.GetListAsync(listKey1).Result)
+            {
+                Console.WriteLine("elem: {0}", elem);
+            }
 
             queue.AddListHead(listKey1, "value4");
-            Console.WriteLine("{0} head is: {1}", listKey1, queue.GetListHeadAsync(listKey1).Result);
+            Console.WriteLine("{0} head is: {1} with len: {2} ", listKey1, queue.GetListHeadAsync(listKey1).Result, queue.GetListLenghAsync(listKey1).Result);
+            Console.WriteLine("{0} tails is: {1} with len: {2} ", listKey1, queue.GetListTailAsync(listKey1).Result, queue.GetListLenghAsync(listKey1).Result);
+            foreach (var elem in queue.GetListAsync(listKey1).Result)
+            {
+                Console.WriteLine("elem: {0}", elem);
+            }
             
             queue.AddListTail(listKey1, "value0");
-            Console.WriteLine("{0} head is: {1}", listKey1, queue.GetListHeadAsync(listKey1).Result);
-            Console.WriteLine("{0} tails is: {1}", listKey1, queue.GetListTailAsync(listKey1).Result);
+            Console.WriteLine("{0} head is: {1} with len: {2} ", listKey1, queue.GetListHeadAsync(listKey1).Result, queue.GetListLenghAsync(listKey1).Result);
+            Console.WriteLine("{0} tails is: {1} with len: {2} ", listKey1, queue.GetListTailAsync(listKey1).Result, queue.GetListLenghAsync(listKey1).Result);
+            foreach (var elem in queue.GetListAsync(listKey1).Result)
+            {
+                Console.WriteLine("elem: {0}", elem);
+            }
 
             Console.ReadKey();
         }

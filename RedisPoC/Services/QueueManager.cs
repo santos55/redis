@@ -42,6 +42,15 @@ namespace Services
                 return await conn.Keys.Exists(db, key);
             }
         }
+
+        public async Task<int> GetListLenghAsync(string key)
+        {
+            using (var conn = new RedisConnection("localhost"))
+            {
+                await conn.Open();
+                return (int)await conn.Lists.GetLength(db, key);
+            }
+        }
         
         /// <summary>
         /// Gets a single value for the specified key.
@@ -86,6 +95,7 @@ namespace Services
                 return value;
             }
         }
+
         /// <summary>
         /// Gets a single value for the specified key.
         /// </summary>
@@ -94,7 +104,20 @@ namespace Services
             using (var conn = new RedisConnection("localhost"))
             {
                 await conn.Open();
-                var value = await conn.Lists.GetString(db, key, -1);
+                var value = await conn.Lists.GetString(db, key, await GetListLenghAsync(key)-1);
+                return value;
+            }
+        }
+
+        /// <summary>
+        /// Gets a single value for the specified key.
+        /// </summary>
+        public async Task<string[]> GetListAsync(string key)
+        {
+            using (var conn = new RedisConnection("localhost"))
+            {
+                await conn.Open();
+                var value = await conn.Lists.RangeString(db, key, 0, await GetListLenghAsync(key) - 1);
                 return value;
             }
         }
