@@ -62,7 +62,10 @@ namespace TestConsole
                 Console.WriteLine("elem: {0}", elem);
             }
 
+            queue.FlushDb();
+
             Console.ReadKey();
+
         }
     }
 }
